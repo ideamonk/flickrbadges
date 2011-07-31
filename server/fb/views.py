@@ -10,22 +10,42 @@ def index(request):
     
 def fb(request):
     username = request.POST['flickrid']
-    profile = get_photos.user_profile(username)
+    try:
+        profile = get_photos.user_profile(username)
+    except:
+        return render_to_response("index.html")
+        
     nsid = profile['user_id']
     
-    social_count, contact_ids = get_photos.get_contacts(nsid)
-    pro_count = get_photos.get_pro_friends(nsid, contact_ids, yql.Public())
+    try:
+        social_count, contact_ids = get_photos.get_contacts(nsid)
+    except:
+        social_count, contact_ids = 0, []
+        
+    try:
+        pro_count = get_photos.get_pro_friends(nsid, contact_ids, yql.Public())
+    except:
+        pro_count = 0
     
     eliteness = 0.0
     if social_count > 0:
         eliteness = float(pro_count)/ float(social_count) 
     
-    org_stats = get_photos.get_organization_stats(nsid, profile['total_photos'])
+    try:
+        org_stats = get_photos.get_organization_stats(nsid, profile['total_photos'])
+    except:
+        org_stats = {
+            'avg_views': 0,
+            'organized':0
+        }
     
     if not profile['location']:
         profile['location'] = "an unknown place"
 
-    movement = get_photos.get_geo_locs(nsid, yql.Public())
+    try:
+        movement = get_photos.get_geo_locs(nsid, yql.Public())
+    except:
+        movement = 0
     
     return render_to_response("fb.html", {
         "username": username, 
