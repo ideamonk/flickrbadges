@@ -19,7 +19,9 @@ def fb(request):
     eliteness = 0.0
     if social_count > 0:
         eliteness = float(pro_count)/ float(social_count) 
-        
+    
+    org_stats = get_photos.get_organization_stats(nsid, profile['total_photos'])
+    
     if not profile['location']:
         profile['location'] = "an unknown place"
 
@@ -34,5 +36,5 @@ def fb(request):
         "social": social_count > 100,
         "introv": social_count < 2,
         "elite": eliteness > 0.5 and (not(profile['is_pro'] == 0)) and social_count>10,
-        
+        "pop": org_stats['avg_views'] > 10,
         })
