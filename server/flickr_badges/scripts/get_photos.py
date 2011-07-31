@@ -123,7 +123,7 @@ def main(user_name) :
     # (contacts, contact_ids) =  get_contacts(user_data['user_id'])
     # pro_friends = get_pro_friends(user_data['user_id'], contact_ids, y_cursor)
     # print get_sets(user_data['user_id'])
-    print get_some_stats(user_data['user_id'], user_data['total_photos'])
+    print get_organization_stats(user_data['user_id'], user_data['total_photos'])
     
     # pics = fetch_info(user_name, y_cursor)
     # print pics
