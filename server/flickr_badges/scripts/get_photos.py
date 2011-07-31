@@ -6,17 +6,18 @@ import urllib2
 def globalize(points):
     ''' Hoo haa !'''
     fixed = [(x+90, y+180) for x,y in points]
+    print fixed
     fallen = []
-    divider = 12
+    divider = 40
     for pt in fixed:
         x,y = pt
-        reduced = (x/divider, y/divider)
+        reduced = (int(x/divider), int(y/divider))
         fallen.append(reduced)
     return len(set(fallen))
     
 def fetch_info(user_id, y_cursor) :
     
-    query = "SELECT id FROM flickr.photos.search WHERE has_geo = 'true' AND user_id = {user}".format(user = user_id)
+    query = "SELECT id FROM flickr.photos.search WHERE has_geo = 'true' AND user_id = '{user}'".format(user = user_id)
     print query
     results = y_cursor.execute(query)
     # print results
@@ -26,9 +27,30 @@ def fetch_info(user_id, y_cursor) :
         photo_ids.append([row['id']])
     
     random.shuffle(photo_ids)
-    limit = 1
+    random.shuffle(photo_ids)
+    random.shuffle(photo_ids)
+    
+    limit = 30
     return [str(x) for [x] in photo_ids[:limit]]
 
+def get_geo_locs(user_id, ycursor):
+    pics = fetch_info(user_id, ycursor)
+    if len(pics) == 0:
+        return 0
+        
+    contact_ids = ""
+    try:
+        contact_ids = ",".join(["\'%s\'"%x for x in pics])
+    except:
+        pass
+    print "---------------------------------"
+    query = "select location.latitude, location.longitude from flickr.photos.info where photo_id IN ({pic_ids})".format(pic_ids=contact_ids)
+    results = ycursor.execute(query)
+    locations = []
+    for row in results.rows:
+        locations.append((float(row['location']['latitude']), float(row['location']['longitude'])))
+        
+    return globalize(locations)
 
 def user_profile(user_name) :
     y_cursor = yql.Public()
@@ -137,11 +159,11 @@ def main(user_name) :
     y_cursor = yql.Public()
     user_data = user_profile(user_name)
     # print user_data
-
+    get_geo_locs(user_data['user_id'], y_cursor)
     # (contacts, contact_ids) =  get_contacts(user_data['user_id'])
     # pro_friends = get_pro_friends(user_data['user_id'], contact_ids, y_cursor)
     # print get_sets(user_data['user_id'])
-    print get_organization_stats(user_data['user_id'], user_data['total_photos'])
+    # print get_organization_stats(user_data['user_id'], user_data['total_photos'])
     
     # pics = fetch_info(user_name, y_cursor)
     # print pics
@@ -149,7 +171,7 @@ def main(user_name) :
     
     
 if __name__ == "__main__" :
-    user_name = "t3rmin4t0r"
+    user_name = "doxology"
     # user_name = "jass2cool"
     main(user_name)
     #print get_groups('11414938@N00')

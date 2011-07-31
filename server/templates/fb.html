@@ -86,26 +86,26 @@
 			<div class="container_12" style="background:white;">
 					<div class="grid_4">
 						
-						<div class="badge enabled">
+						<div class="badge {% if travel %}enabled{% endif %}">
 							<div class="badgepic traveler">
 								<div class="rule">
-									foo bar bap
+									Travels about while taking photos
 								</div>
 							</div>
 						</div>
 						<div class="desc">
-							<a href="#" class="button">Traveller</a>
+							<a href="#" class="button {% if not travel %}disabled{% endif %}">Traveller</a>
 						</div>
 						
-						<div class="badge enabled">
+						<div class="badge {% if globe %}enabled{% endif %}">
 							<div class="badgepic globetrot">
 								<div class="rule">
-									foo bar bap
+									Traveled across atleast some of the seven seas
 								</div>
 							</div>
 						</div>
 						<div class="desc">
-							<a href="#" class="button enabled">Globetrotter</a>
+							<a href="#" class="button {% if not globe %}disabled{% endif %}">Globetrotter</a>
 						</div>
 						
 						<div class="badge {% if org %}enabled{% endif %}">
@@ -147,7 +147,7 @@
 						<div class="badge {% if pop %}enabled{% endif %}">
 							<div class="badgepic pop">
 								<div class="rule">
-									On average,  your photos have been viewed more than 10 times
+									Photos have had more than 10 views on an average
 								</div>
 							</div>
 						</div>
@@ -160,7 +160,7 @@
 						<div class="badge {% if early %}enabled{% endif %}">
 							<div class="badgepic early">
 								<div class="rule">
-									Is an early adopter of flickr
+									Looks like somebody is an early bird
 								</div>
 							</div>
 						</div>

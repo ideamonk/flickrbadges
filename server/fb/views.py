@@ -25,6 +25,8 @@ def fb(request):
     if not profile['location']:
         profile['location'] = "an unknown place"
 
+    movement = get_photos.get_geo_locs(nsid, yql.Public())
+    
     return render_to_response("fb.html", {
         "username": username, 
         "guy_name": profile['realname'],
@@ -38,4 +40,6 @@ def fb(request):
         "elite": eliteness > 0.5 and (not(profile['is_pro'] == 0)) and social_count>10,
         "pop": org_stats['avg_views'] > 10,
         "org": org_stats['organized'] > 0.66,
+        "travel": movement >= 2,
+        "globe": movement >= 5,
         })
