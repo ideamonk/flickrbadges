@@ -52,6 +52,7 @@ def get_exifs(pics, y_cursor):
 #     query = "SELECT * FROM flickr.photos"
 
 def get_contacts(user_id) :
+    
     url = "http://api.flickr.com/services/rest/?method=flickr.contacts.getPublicList&api_key=5002b5ef867cb59be9f783357b6b49ca&user_id={user_id}&format=json&nojsoncallback=1".format(user_id = user_id)
     
     try:
@@ -92,21 +93,37 @@ def get_sets(user_id) :
 
     if data :
         sets = json.loads(data.read())
-        len(sets['photosets']['photoset'])
-        # for row in sets['photosets']['photoset'] :
-        #     print row
-        
+        set_count = len(sets['photosets']['photoset'])
+        view_count = 0
+        photos_count = 0
+        comment_count = 0
+        dates = []
+        for row in sets['photosets']['photoset'] :
+            #print row
+            view_count += int(row['view_count'])
+            photos_count += int(row['photos'])
+            comment_count += int(row['comment_count'])
+            dates.append(row['date_create'])
+        return (set_count, [view_count, photos_count, comment_count, dates])
     
     return (0, False)
 
+def get_organization_stats(user_id, total_photos):
     
+    (set_count, [view_count, photos_count, comment_count, dates]) = get_sets(user_id)
+
+    return {'avg_views' : float(view_count)/float(total_photos), 'organized' : float(photos_count)/float(total_photos), 'avg_comments' : float(comment_count)/float(total_photos), 'no_of_sets' : set_count}
+
+
 def main(user_name) :
     y_cursor = yql.Public()
     user_data = user_profile(user_name)
-    print user_data
-    #(contacts, contact_ids) =  get_contacts(user_data['user_id'])
-    #pro_friends = get_pro_friends(user_data['user_id'], contact_ids, y_cursor)
-    get_sets(user_data['user_id'])
+    # print user_data
+
+    # (contacts, contact_ids) =  get_contacts(user_data['user_id'])
+    # pro_friends = get_pro_friends(user_data['user_id'], contact_ids, y_cursor)
+    # print get_sets(user_data['user_id'])
+    print get_some_stats(user_data['user_id'], user_data['total_photos'])
     
     # pics = fetch_info(user_name, y_cursor)
     # print pics
@@ -114,7 +131,7 @@ def main(user_name) :
     
     
 if __name__ == "__main__" :
-    # user_name = "t3rmin4t0r"
-    user_name = "jass2cool"
+    user_name = "t3rmin4t0r"
+    # user_name = "jass2cool"
     main(user_name)
     #print get_groups('11414938@N00')
