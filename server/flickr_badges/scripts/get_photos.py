@@ -65,14 +65,21 @@ def get_contacts(user_id) :
         # print sets
         count = sets['contacts']['total']
         contact_ids = []
-        for contact in sets['contacts']['contact']:
-            contact_ids.append(str(contact['nsid']))
+        try:
+            for contact in sets['contacts']['contact']:
+                contact_ids.append(str(contact['nsid']))
+        except:
+            return (0, [])
         return (count, contact_ids)
             
     return (0, False)
 
 def get_pro_friends(user_id, contact_ids, y_cursor) :
-    contact_ids = ["'{}'".format(contact_id) for contact_id in contact_ids ]
+    contact_ids = "'{}'"
+    try:
+        contact_ids = ["'{}'".format(contact_id) for contact_id in contact_ids ]
+    except:
+        pass
     query = "SELECT ispro FROM  flickr.people.info2 WHERE user_id IN ({user_ids})".format(user_ids = ','.join(contact_ids))
     print query
     results = y_cursor.execute(query)

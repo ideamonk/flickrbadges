@@ -1,5 +1,5 @@
 # Create your views here.
-
+import yql
 from django.http import HttpResponse
 from django.core import serializers
 from django.shortcuts import render_to_response
@@ -13,8 +13,13 @@ def fb(request):
     profile = get_photos.user_profile(username)
     nsid = profile['user_id']
     
-    social_count = get_photos.get_contacts(nsid)[0]
+    social_count, contact_ids = get_photos.get_contacts(nsid)
+    pro_count = get_photos.get_pro_friends(nsid, contact_ids, yql.Public())
     
+    eliteness = 0.0
+    if social_count > 0:
+        eliteness = float(pro_count)/ float(social_count) 
+        
     if not profile['location']:
         profile['location'] = "an unknown place"
 
@@ -28,4 +33,6 @@ def fb(request):
         "early": profile['firstdate'] <= 2005,
         "social": social_count > 100,
         "introv": social_count < 2,
+        "elite": eliteness > 0.5 and (not(profile['is_pro'] == 0)) and social_count>10,
+        
         })

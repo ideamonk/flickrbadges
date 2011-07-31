@@ -335,6 +335,9 @@ div.badgepic.social{
 div.badgepic.introv{
     background: url(../img/intro.png) 80px 80px no-repeat;
 }
+div.badgepic.elite{
+    background: url(../img/elite.png) 80px 80px no-repeat;
+}
 
 /* badges */
 div.badge{
