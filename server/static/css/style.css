@@ -329,10 +329,20 @@ div.badgepic.pro{
 div.badgepic.early{
     background: url(../img/old.png) 80px 80px no-repeat;
 }
+div.badgepic.social{
+    background: url(../img/social.png) 80px 80px no-repeat;
+}
+div.badgepic.introv{
+    background: url(../img/intro.png) 80px 80px no-repeat;
+}
 
 /* badges */
+div.badge{
+    opacity: 0.5;
+}
 div.badge.enabled {
     background: url(../img/badge_1.png) 0px 0px no-repeat;
+    opacity: 1.0;
 }
 
 div.desc a.button{
