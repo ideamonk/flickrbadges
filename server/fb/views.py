@@ -25,7 +25,7 @@ def fb(request):
         "location": profile['location'],
         "buddyurl": profile['buddyiconurl'],
         "is_pro": not(profile['is_pro'] == 0),
-        "early": profile['firstdate'] <= 2006,
+        "early": profile['firstdate'] <= 2005,
         "social": social_count > 100,
-        
+        "introv": social_count < 2,
         })
