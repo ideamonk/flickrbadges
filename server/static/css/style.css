@@ -329,6 +329,9 @@ div.badgepic.pro{
 div.badgepic.early{
     background: url(../img/old.png) 80px 80px no-repeat;
 }
+div.badgepic.social{
+    background: url(../img/social.png) 80px 80px no-repeat;
+}
 
 /* badges */
 div.badge.enabled {

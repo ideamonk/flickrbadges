@@ -11,6 +11,9 @@ def index(request):
 def fb(request):
     username = request.POST['flickrid']
     profile = get_photos.user_profile(username)
+    nsid = profile['user_id']
+    
+    social_count = get_photos.get_contacts(nsid)[0]
     
     if not profile['location']:
         profile['location'] = "an unknown place"
@@ -23,5 +26,6 @@ def fb(request):
         "buddyurl": profile['buddyiconurl'],
         "is_pro": not(profile['is_pro'] == 0),
         "early": profile['firstdate'] <= 2006,
+        "social": social_count > 100,
         
         })

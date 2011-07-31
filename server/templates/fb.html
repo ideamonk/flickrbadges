@@ -133,10 +133,15 @@
 							<a href="#" class="button {% if not is_pro %}disabled{% endif %}">Pro</a>
 						</div>
 																		
-						<div class="badge">
+						<div class="badge {% if social %}enabled{% endif %}">
+							<div class="badgepic social">
+								<div class="rule">
+									Has more than 100 contacts on flickr
+								</div>
+							</div>
 						</div>
 						<div class="desc">
-							<a href="#" class="button disabled">Traveller</a>
+							<a href="#" class="button {% if not is_pro %}disabled{% endif %}">Social flickr</a>
 						</div>
 					</div>
 					
