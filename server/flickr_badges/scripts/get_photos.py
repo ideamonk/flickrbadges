@@ -3,6 +3,17 @@ import json
 import random
 import urllib2
 
+def globalize(points):
+    ''' Hoo haa !'''
+    fixed = [(x+90, y+180) for x,y in points]
+    fallen = []
+    divider = 12
+    for pt in fixed:
+        x,y = pt
+        reduced = (x/divider, y/divider)
+        fallen.append(reduced)
+    return len(set(fallen))
+    
 def fetch_info(user_id, y_cursor) :
     
     query = "SELECT id FROM flickr.photos.search WHERE has_geo = 'true' AND user_id = {user}".format(user = user_id)

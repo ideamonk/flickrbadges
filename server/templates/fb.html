@@ -105,18 +105,18 @@
 							</div>
 						</div>
 						<div class="desc">
-							<a href="#" class="button enabled">Globe Trotter</a>
+							<a href="#" class="button enabled">Globetrotter</a>
 						</div>
 						
-						<div class="badge enabled">
+						<div class="badge {% if org %}enabled{% endif %}">
 							<div class="badgepic organizer">
 								<div class="rule">
-									foo bar bap
+									Has organized 2 of every 3 photos in account
 								</div>
 							</div>
 						</div>
 						<div class="desc">
-							<a href="#" class="button enabled">Organizer</a>
+							<a href="#" class="button {% if not org %}disabled{% endif %}">Organizer</a>
 						</div>
 					</div>
 					

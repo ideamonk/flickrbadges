@@ -37,4 +37,5 @@ def fb(request):
         "introv": social_count < 2,
         "elite": eliteness > 0.5 and (not(profile['is_pro'] == 0)) and social_count>10,
         "pop": org_stats['avg_views'] > 10,
+        "org": org_stats['organized'] > 0.66,
         })
