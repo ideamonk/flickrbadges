@@ -43,9 +43,9 @@
 						<img src="/static/img/fb_small.png" alt="❤ facebook badges ❤" title="❤ facebook badges ❤"  />
 				</div>
 				<div class="grid_6">
-					<form action="/fb" method="post" accept-charset="utf-8" style="float:right;">
+					<form action="/fb" method="post" accept-charset="utf-8" style="float:right;" onsubmit="location.href='/' + $('#flickrid').val(); return false;">
 					  <img src="/static/img/trymore.png" />
-						<input type="text" name="flickrid" value=""  style=" padding:5px 10px; -webkit-border-radius:15px; margin-top:10px;">
+						<input type="text" name="flickrid" id="flickrid" value=""  style=" padding:5px 10px; -webkit-border-radius:15px; margin-top:10px;">
 					</form>
 				</div>
 			<div>
