@@ -40,7 +40,7 @@
     </header>
     <div id="main" role="main">
 			<div id="logo">
-				<form action="/fb" method="post" accept-charset="utf-8">
+				<form action="/" method="get" accept-charset="utf-8" id="fbform" onsubmit="location.href='/' + $('#flickrid').val(); return false;">
 					<p><input type="text" name="flickrid" value="" id="flickrid"></p>
 					<p><input type="submit" value="Continue &rarr;"></p>
 				</form>

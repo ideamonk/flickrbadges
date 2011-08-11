@@ -8,8 +8,8 @@ import flickr_badges.scripts.get_photos as get_photos
 def index(request):
     return render_to_response("index.html")
     
-def fb(request):
-    username = request.POST['flickrid']
+def fb(request, username):
+    #username = request.GET['flickrid']
     try:
         profile = get_photos.user_profile(username)
     except:

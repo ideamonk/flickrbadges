@@ -9,7 +9,7 @@ from django.conf.urls.defaults import *
 urlpatterns = patterns('',
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': settings.PROJECT_ROOT + '/static', 'show_indexes':True}),
-    (r'^fb', views.fb),
+    (r'^(?P<username>.*)$', views.fb),
     (r'^', views.index),
     # Example:
     # (r'^server/', include('server.foo.urls')),

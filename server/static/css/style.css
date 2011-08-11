@@ -359,6 +359,11 @@ div.desc a.button{
 div.rule{
     display:none;
 }
+
+#fbform{
+    padding-bottom:370px;
+    background: url(../img/arrow.jpg) 160px bottom no-repeat;
+}
 /* -------------------- css3 circles
 div.badge{
     padding-left:42px;
